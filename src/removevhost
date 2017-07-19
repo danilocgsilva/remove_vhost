@@ -60,3 +60,17 @@ if [ -f $vhost_path/$vhost_filename ]; then
     exit
 fi
 
+##
+# Check for permissions to write in the files
+#
+if [ ! -w $hosts_path/$hosts_filename ]; then
+    echo The user does not have permission to write in $hosts_path/$hosts_filename.
+    echo Execute with a higher permissioned user \(you may also have to ajusts the variables setted to this user\).
+    exit
+fi
+if [ ! -w $vhost_path/$vhost_filename ]; then
+    echo The user does not have permission to write in $vhost_path/$vhost_filename.
+    echo Execute with a higher permissioned user \(you may also have to ajusts the variables setted to this user\).
+    exit
+fi
+
