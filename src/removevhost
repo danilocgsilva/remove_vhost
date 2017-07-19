@@ -1,0 +1,62 @@
+#!/bin/bash
+
+##
+# Functions that provides informations for the missing variables
+#
+removevhost_provides_variables_information() {
+    echo This utility MUST have two environment setted variables:
+    echo \$vhost_path: The path where the \"httpd-vhosts.conf\" file are located.
+    echo \$hosts_path: The path where the \"hosts\" file are located.
+    echo You can use the \"export\" feature in the user configuration \(usually the .bash_profile located in the user root\) to set the variables.
+}
+
+##
+# Set the file names, expected to be found in the paths
+#
+vhost_filename=httpd-vhosts.conf
+hosts_filename=hosts
+
+##
+# Check for $vhost_path variable
+#
+if [ -z $vhost_path ]; then
+    removevhost_provides_variables_information
+    exit
+fi
+
+##
+# Check for $hosts_path variable
+#
+if [ -z $hosts_path ]; then
+    removevhost_provides_variables_information
+    exit
+fi
+
+##
+# Check if the variables setted directory exists
+#
+if [ ! -d $vhost_path ]; then
+    echo The setted directory in the \$vhost_path variable does not exists.
+    echo Please, change it for a valid location.
+    exit
+fi
+if [ ! -d $hosts_path ]; then
+    echo The setted directory in the \$hosts_path variable does not exists.
+    echo Please, change it for a valid location.
+    exit
+fi
+
+##
+# Check if the files from virtual hosts exists in their locations
+#
+if [ -f $hosts_path/$hosts_filename ]; then
+    echo There\'s no hosts file in the hosts path.
+    echo Check if the $hosts_path/$hosts_filename file exists.
+    exit
+fi
+if [ -f $vhost_path/$vhost_filename ]; then
+    echo There\'s no virtual host file in the virtual host path.
+    echo Check if the $vhost_path/$vhost_filename file exists.
+    exit
+fi
+

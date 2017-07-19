@@ -1,0 +1,5 @@
+1. Check for setted variables for hosts and virtualhosts.
+2. Check if the files from setted variables exists.
+3. Check for permissions to be written in the two files.
+4. Check for $1 variable. Must be the virutal host base name.
+5. Do the tasks.
