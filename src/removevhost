@@ -1,6 +1,10 @@
 #!/bin/bash
 
 ##
+### Function definitions
+#
+
+##
 # Functions that provides informations for the missing variables
 #
 removevhost_provides_variables_information() {
@@ -10,29 +14,34 @@ removevhost_provides_variables_information() {
     echo You can use the \"export\" feature in the user configuration \(usually the .bash_profile located in the user root\) to set the variables.
 }
 
+
+##
+### Tasks
+#
+
 ##
 # Set the file names, expected to be found in the paths
 #
 vhost_filename=httpd-vhosts.conf
 hosts_filename=hosts
 
+
 ##
-# Check for $vhost_path variable
+# 1. from planning
+# Check for $vhost_path variable and $hosts_path variables
 #
 if [ -z $vhost_path ]; then
     removevhost_provides_variables_information
     exit
 fi
-
-##
-# Check for $hosts_path variable
-#
 if [ -z $hosts_path ]; then
     removevhost_provides_variables_information
     exit
 fi
 
+
 ##
+# 2. From planing
 # Check if the variables setted directory exists
 #
 if [ ! -d $vhost_path ]; then
@@ -46,7 +55,9 @@ if [ ! -d $hosts_path ]; then
     exit
 fi
 
+
 ##
+# 3. from planning
 # Check if the files from virtual hosts exists in their locations
 #
 if [ -f $hosts_path/$hosts_filename ]; then
@@ -60,7 +71,9 @@ if [ -f $vhost_path/$vhost_filename ]; then
     exit
 fi
 
+
 ##
+# 4. from planning
 # Check for permissions to write in the files
 #
 if [ ! -w $hosts_path/$hosts_filename ]; then
@@ -73,4 +86,15 @@ if [ ! -w $vhost_path/$vhost_filename ]; then
     echo Execute with a higher permissioned user \(you may also have to ajusts the variables setted to this user\).
     exit
 fi
+
+
+##
+# 5. from planning
+# Check if the first argument was provided
+#
+if [ -z $1 ]; then
+    echo You must provides the first argument to be the virtualhost name.
+    exit  
+fi
+
 

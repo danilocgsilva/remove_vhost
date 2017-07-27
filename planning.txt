@@ -1,5 +1,22 @@
-1. Check for setted variables for hosts and virtualhosts.
-2. Check if the files from setted variables exists.
-3. Check for permissions to be written in the two files.
-4. Check for $1 variable. Must be the virutal host base name.
-5. Do the tasks.
+1. Check for setted variables for hosts and virtualhosts. If OK:
+    Proceeds to 2.
+Else
+    Warns the problem and exits.
+2. Check if the folders from setted variables exists. If OK:
+    Proceeds to 3.
+Else
+    Warns the problem and exits.
+3. Checks if the files itself exists. If OK:
+    Proceeds to 4.
+Else
+    Warns the problem and exits.
+4. Check for permissions to be written in the two files. If OK:
+    Proceeds to 5.
+Else
+    Warns the problem and exits.
+5. Check for $1 variable. Must be the virutal host base name. If OK:
+    Proceeds to 6.
+Else
+    Warns the problem and exits.
+6. Do the tasks.
+    6.1 Checks if the virtualhost provided exists both in the hosts and virtual host files.
